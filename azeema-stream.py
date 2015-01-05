@@ -11,8 +11,7 @@ twitter = TwythonStreamer(
 
 class botStreamer(TwythonStreamer):
 	def on_success(self, data):
-		user = data['user']
-		name = user['screen_name']
+		name = data['user']['screen_name']
 		status= "@" + name + " Useless message because my creator is a lazy bum."
 		tweets.tweetout(status)
 
