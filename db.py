@@ -84,4 +84,12 @@ def create_tables(con):
         """
     )
 
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS values (
+            last_tweet_id   INT( 20 )
+        );
+        """
+    )
+
     con.commit()

@@ -1,6 +1,6 @@
 from twython import Twython
 import tweets
-from db import config
+from db import *
 
 twitter = TwythonStreamer(
     config["Twitter"]["Consumer_Key"],
@@ -9,13 +9,15 @@ twitter = TwythonStreamer(
     config["Twitter"]["Access_Token_Secret"]
 )
 
+sql = "SELECT last_tweet_id FROM values"
+last_tweet_id = db.read(db.con, sql, None)
 temp_names = []
 
 twitter = Twython(apikey,apisecret,oauthtoken,oauthtokensecret)
 
 LIMIT = int(config["Constants"]["Tweets_Per_Hour"]) / 2
 
-data = twitter.search(q='@IdeabinBot', since_id=config["Twitter"]["Last_Tweet_ID"])
+data = twitter.search(q='@IdeabinBot', since_id=last_tweet_id)
 
 for count,x in enumerate(data['statuses']):
 
@@ -30,4 +32,5 @@ for count,x in enumerate(data['statuses']):
 		tweets.tweetout(status)
 		temp_names.append(name)
 
-#Save last_tweet_id in DB
+sql = "UPDATE values SET last_tweet_id = " + str(last_tweet_id)
+db.write(db.con, sql)
