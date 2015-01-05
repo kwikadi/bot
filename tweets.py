@@ -41,3 +41,6 @@ def tweetify(msg, desc, link):
         return msg + desc + ' ' + link
     else:
         return msg + link
+
+def tweetout(status):
+    twitter.update_status(status=status)
