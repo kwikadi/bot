@@ -1,14 +1,24 @@
 import sendgrid
 from datetime import date, timedelta
+import ideas
 
-print date.today() - timedelta(days=7)
+sendgrid = sendgrid.SendGridClient(
+    config["SendGrid"]["API_User"],
+    config["SendGrid"]["API_Key"],
+)
 
-sendgrid = sendgrid.SendGridClient(api_user, api_key)
+emails = []
 message = sendgrid.Mail()
 
-message.add_to("test@sendgrid.com")
-message.set_from("you@youremail.com")
+for idea in ideas.get_tweeted(date.today() - timedelta(days=7)):
+	emailbody += "whatever plus ideas"
+
+for user in users.get_all():
+	emails.append(user['email'])
+
+message.set_from("xyz@IdeaBin.com")
+message.add_to(emails)
 message.set_subject("Weekly Newsletter for IdeaBin")
-message.set_html("and easy to do anywhere, even with Python")
+message.set_html(emailbody)
 
 sendgrid.send(message)

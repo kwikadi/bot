@@ -36,6 +36,14 @@ def get_untweeted():
     fetchall = db.read(db.con, sql, None)
     return map(Idea._make, fetchall)
 
+def get_tweeted(time):
+    """Return ideas that have been tweeted out. """
+
+    sql = "SELECT * FROM ideas WHERE tweetid IS NOT NULL AND FROM_DAYS(TO_DAYS(created_at)) <= (?) ;"
+    fetchall = db.read(db.con, sql, time)
+    return map(Idea._make, fetchall)
+
+
 
 def set_tweetid(idea, tid):
     """ Set the tweetid of the idea to the passed value. """
