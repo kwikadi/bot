@@ -6,8 +6,8 @@ import sqlite3
 import datetime as dt
 from collections import namedtuple
 
-from urllib.parse import urlencode
-from urllib.request import urlopen
+from urllib import urlencode
+from urllib2 import urlopen
 
 import db
 
@@ -57,8 +57,8 @@ def fetch_gists(user):
 
     url = GISTS_URL.format(user.username)
     params = {
-        'client_id': db.config["Github"]["Client_Id"],
-        'client_secret': db.config["Github"]["Client_Secret"]
+        'client_id': db.config.get("Github","Client_Id"),
+        'client_secret': db.config.get("Github","Client_Secret")
     }
 
     if user.last_fetch:

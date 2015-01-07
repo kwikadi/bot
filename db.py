@@ -2,14 +2,14 @@
 
 import os
 import sqlite3
-from configparser import ConfigParser
+from ConfigParser import SafeConfigParser
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-config = ConfigParser()
+config = SafeConfigParser()
 config.read(os.path.join(CURRENT_DIR, 'config.ini'))
 
-DATABASE = config["Database"]["File"]
+DATABASE = config.get("Database","File")
 
 # Detect no types. We'll parse everything on our own.
 # Done because reading Idea.created_at was causing problems.
@@ -86,8 +86,8 @@ def create_tables(con):
 
     cur.execute(
         """
-        CREATE TABLE IF NOT EXISTS values (
-            last_tweet_id   INT( 20 ),
+        CREATE TABLE IF NOT EXISTS id_value (
+            last_tweet    INT ( 20 )   PRIMARY KEY
         );
         """
     )

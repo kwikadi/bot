@@ -3,7 +3,7 @@
 import sqlite3
 import datetime as dt
 from collections import namedtuple
-from urllib.request import urlopen
+from urllib2 import urlopen
 
 import db
 
@@ -24,7 +24,7 @@ def add(user):
 def get_all():
     """ Return all users present in the database. """
 
-    fetchall = db.read(db.con, "SELECT * FROM users;")
+    fetchall = db.read("SELECT * FROM users;")
     return map(User._make, fetchall)
 
 
