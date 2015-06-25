@@ -20,7 +20,7 @@ Tweet = namedtuple('Tweet', 'id, msg')
 LIMIT = int(db.config.get("Constants","Tweets_Per_Hour")) / 2
 
 data = twitter.search(q='@IdeabinBot', since_id=last_tweet_id)
-print (data['statuses'])
+
 for count,x in enumerate(data['statuses']):
 
   if count == LIMIT:
@@ -31,7 +31,7 @@ for count,x in enumerate(data['statuses']):
     if name not in temp_names:
       status="@" +name+ " Useless message ahoy!"
       last_tweet_id= x['id']
-      tweet = tweets.tweetout(status)
+      tweet = tweets.tweetout(status, last_tweet_id=last_tweet_id)
       temp_names.append(name)
       sql = "INSERT into retweets values (?), now() ;"
       db.write(db.con, sql, tweet['id'])

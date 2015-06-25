@@ -5,8 +5,9 @@ import db
 class botStreamer(TwythonStreamer):
 	def on_success(self, data):
 		name = data['user']['screen_name']
+		last_tweet_id = data['id']
 		status= "@" + name + " I need to think up of something!"
-		tweet = tweets.tweetout(status)
+		tweet = tweets.tweetout(status, last_tweet_id=last_tweet_id)
 		if tweet:
 			sql = "INSERT into retweets values (?), now() ;"
 			db.write(db.con, sql, tweet['id'])

@@ -45,5 +45,5 @@ def tweetify(msg, desc, link):
     else:
         return msg + link
 
-def tweetout(status):
-    twitter.update_status(status=status)
+def tweetout(status, last_tweet_id):
+    twitter.update_status(status=status, in_reply_to_status_id=last_tweet_id)
