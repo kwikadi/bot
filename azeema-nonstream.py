@@ -12,7 +12,7 @@ twitter = Twython(
 )
 
 sql = "SELECT max(tweet_id) FROM id_value"
-last_tweet_id = db.read(db.con, sql)[0]
+last_tweet_id = db.read(db.con, sql)[0][0] or 0
 temp_names = []
 
 Tweet = namedtuple('Tweet', 'id, msg')
@@ -20,7 +20,7 @@ Tweet = namedtuple('Tweet', 'id, msg')
 LIMIT = int(db.config.get("Constants","Tweets_Per_Hour")) / 2
 
 data = twitter.search(q='@IdeabinBot', since_id=last_tweet_id)
-
+print (data['statuses'])
 for count,x in enumerate(data['statuses']):
 
   if count == LIMIT:

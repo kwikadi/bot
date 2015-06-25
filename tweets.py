@@ -26,13 +26,12 @@ def new(idea):
         msg = ".@" + user.twitter + " - "
     else:
         msg = "New idea: "
-
-    msg = tweetify(msg, idea.description, GIST_URL.format(idea.gistid))
-    tweet = twitter.update_status(status=msg)
-    # update last_tweet table
-    sql = "INSERT into id_value values (?);"
-    db.write(db.con, sql, tweet['id'])
-    return Tweet(tweet['id'], msg)
+    try:
+        msg = tweetify(msg, idea.description, GIST_URL.format(idea.gistid))
+        tweet = twitter.update_status(status=msg)
+    except:
+        print("Stupid Twitter API, probably.")
+        return None
 
 
 def tweetify(msg, desc, link):

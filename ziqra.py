@@ -14,4 +14,5 @@ for count, idea in enumerate(ideas.get_untweeted()):
         break
 
     tweet = tweets.new(idea)
-    ideas.set_tweetid(idea, tweet.id)
+    if tweet:
+    	ideas.set_tweetid(idea, tweet.id)
