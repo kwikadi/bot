@@ -12,6 +12,7 @@ twitter = Twython(
 )
 
 sql = "SELECT max(tweet_id) FROM id_value"
+
 last_tweet_id = db.read(db.con, sql)[0][0] or 0
 temp_names = []
 
@@ -23,18 +24,18 @@ data = twitter.search(q='@IdeabinBot', since_id=last_tweet_id)
 
 for count,x in enumerate(data['statuses']):
 
-  if count == LIMIT:
-    break
-  else:
-    name = x['user']['screen_name']
+    if count == LIMIT:
+        break
+    else:
+        name = x['user']['screen_name']
 
     if name not in temp_names:
-      status="@" +name+ " Useless message ahoy!"
-      last_tweet_id= x['id']
-      tweet = tweets.tweetout(status, last_tweet_id=last_tweet_id)
-      temp_names.append(name)
-      sql = "INSERT into retweets values (?), now() ;"
-      db.write(db.con, sql, tweet['id'])
+        status="@" +name+ " Useless message ahoy!"
+        last_tweet_id= x['id']
+        tweet = tweets.tweetout(status, last_tweet_id=last_tweet_id)
+        temp_names.append(name)
+        sql = "INSERT into retweets values (?), now() ;"
+        db.write(db.con, sql, tweet['id'])
 
 
 sql = "INSERT INTO id_value values (?)"

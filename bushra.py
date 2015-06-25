@@ -1,5 +1,6 @@
 import sendgrid
 from datetime import date, timedelta
+from db import config
 import ideas
 
 sendgrid = sendgrid.SendGridClient(
