@@ -95,7 +95,7 @@ def create_tables(con):
     cur.execute(
         """
         CREATE TABLE IF NOT EXISTS retweets (
-            retweetid   INT( 20 )   UNIQUE,
+            retweet_id   INT( 20 )   UNIQUE,
             retweeted_at    TIMESTAMP   PRIMARY KEY
         );
         """
