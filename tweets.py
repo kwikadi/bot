@@ -1,6 +1,7 @@
 """ Tweets out an idea's descriptions. """
 
 import users
+import db
 from db import config
 from collections import namedtuple
 from twython import Twython
@@ -28,6 +29,9 @@ def new(idea):
 
     msg = tweetify(msg, idea.description, GIST_URL.format(idea.gistid))
     tweet = twitter.update_status(status=msg)
+    # update last_tweet table
+    sql = "INSERT into id_value values (?);"
+    db.write(db.con, sql, tweet['id'])
     return Tweet(tweet['id'], msg)
 
 

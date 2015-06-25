@@ -6,8 +6,8 @@ import sqlite3
 import datetime as dt
 from collections import namedtuple
 
-from urllib import urlencode
-from urllib2 import urlopen
+from urllib.parse import urlencode
+from urllib.request import urlopen
 
 import db
 

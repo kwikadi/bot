@@ -2,11 +2,11 @@
 
 import os
 import sqlite3
-from ConfigParser import SafeConfigParser
+from configparser import ConfigParser
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-config = SafeConfigParser()
+config = ConfigParser()
 config.read(os.path.join(CURRENT_DIR, 'config.ini'))
 
 DATABASE = config.get("Database","File")
@@ -87,7 +87,7 @@ def create_tables(con):
     cur.execute(
         """
         CREATE TABLE IF NOT EXISTS id_value (
-            last_tweet    INT ( 20 )   PRIMARY KEY
+            tweet_id    INT ( 20 )   PRIMARY KEY
         );
         """
     )

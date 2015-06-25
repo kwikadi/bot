@@ -11,8 +11,8 @@ twitter = Twython(
     db.config.get("Twitter","Access_Token_Secret")
 )
 
-sql = "SELECT last_tweet_id FROM values"
-last_tweet_id = db.read(db.con, sql)
+sql = "SELECT max(tweet_id) FROM id_value"
+last_tweet_id = db.read(db.con, sql)[0]
 temp_names = []
 
 Tweet = namedtuple('Tweet', 'id, msg')
@@ -37,5 +37,5 @@ for count,x in enumerate(data['statuses']):
       db.write(db.con, sql, tweet['id'])
 
 
-sql = "UPDATE values SET last_tweet_id = (?)"
+sql = "INSERT INTO id_value values (?)"
 db.write(db.con, sql, last_tweet_id)
