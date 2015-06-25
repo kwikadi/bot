@@ -1,7 +1,6 @@
 """ Tweets out an idea's descriptions. """
 
 import users
-import db
 from db import config
 from collections import namedtuple
 from twython import Twython
@@ -26,12 +25,10 @@ def new(idea):
         msg = ".@" + user.twitter + " - "
     else:
         msg = "New idea: "
-    try:
-        msg = tweetify(msg, idea.description, GIST_URL.format(idea.gistid))
-        tweet = twitter.update_status(status=msg)
-    except:
-        print("Stupid Twitter API, probably.")
-        return None
+
+    msg = tweetify(msg, idea.description, GIST_URL.format(idea.gistid))
+    tweet = twitter.update_status(status=msg)
+    return Tweet(tweet['id'], msg)
 
 
 def tweetify(msg, desc, link):

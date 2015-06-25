@@ -9,7 +9,7 @@ CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 config = ConfigParser()
 config.read(os.path.join(CURRENT_DIR, 'config.ini'))
 
-DATABASE = config.get("Database","File")
+DATABASE = config["Database"]["File"]
 
 # Detect no types. We'll parse everything on our own.
 # Done because reading Idea.created_at was causing problems.
