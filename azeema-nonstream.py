@@ -5,9 +5,9 @@ from collections import namedtuple
 import ideas
 
 twitter = Twython(
-	db.config["Twitter"]["Consumer_Key"]
-	db.config["Twitter"]["Consumer_Secret"]
-	db.config["Twitter"]["Access_Token_Key"]
+	db.config["Twitter"]["Consumer_Key"],
+	db.config["Twitter"]["Consumer_Secret"],
+	db.config["Twitter"]["Access_Token_Key"],
 	db.config["Twitter"]["Access_Token_Secret"]
 )
 

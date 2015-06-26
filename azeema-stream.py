@@ -13,9 +13,9 @@ class botStreamer(TwythonStreamer):
 			db.write(db.con, sql, tweet['id'])
 
 stream = botStreamer(
-	db.config["Twitter"]["Consumer_Key"]
-	db.config["Twitter"]["Consumer_Secret"]
-	db.config["Twitter"]["Access_Token_Key"]
+	db.config["Twitter"]["Consumer_Key"],
+	db.config["Twitter"]["Consumer_Secret"],
+	db.config["Twitter"]["Access_Token_Key"],
 	db.config["Twitter"]["Access_Token_Secret"]
 )
 
