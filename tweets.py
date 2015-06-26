@@ -6,10 +6,10 @@ from collections import namedtuple
 from twython import Twython
 
 twitter = Twython(
-    config.get("Twitter","Consumer_Key"),
-    config.get("Twitter","Consumer_Secret"),
-    config.get("Twitter","Access_Token_Key"),
-    config.get("Twitter","Access_Token_Secret")
+    config["Twitter"]["Consumer_Key"]
+    config["Twitter"]["Consumer_Secret"]
+    config["Twitter"]["Access_Token_Key"]
+    config["Twitter"]["Access_Token_Secret"]
 )
 
 GIST_URL = "https://gist.github.com/{0}"
